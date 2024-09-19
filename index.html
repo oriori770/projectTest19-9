@@ -1,11 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer type="module" src="index.js"></script>
+  </head>
+  <body>
+    <header>
+      <h5 id="mainTitle">NBA FANTASY 2014-2024</h>
+    </header>
+    <main>
+        <p id="secTitle">My Fantasy Team</p>
+      <div id="players">
+        <div class="player">
+          <h5 class="positionPlayer">Point Guard</h5>
+          <div  id="pgPos"></div>
+        </div>
+        <div  class="player">
+          <h5 class="positionPlayer">Shooting Guard</h5>
+          <div id="sgPos"></div>
+        </div>
+        <div class="player">
+          <h5 class="positionPlayer">Small Forward</h5>
+          <div id="sfPos"></div>
+        </div>
+        <div  class="player">
+          <h5 class="positionPlayer">Power Forward</h5>
+          <div id="pfPos"></div>
+        </div>
+        <div class="player">
+          <h5 class="positionPlayer">Center</h5>
+          <div id="cPos"></div>
+        </div>
+      </div>
+      <form id="serchPlayerForm">
+        <div id="inputSerchPlayer">
+          <select id="status" name="position" required>
+            <option value="PG">PG</option>
+            <option value="SG">SG</option>
+            <option value="SF">SF</option>
+            <option value="PF">PF</option>
+            <option value="C">C</option>
+          </select>
+          <div class="rangeInput">
+              <label id="pointsLabel" for="volume">10000</label>
+            <input type="range" id="points" name="points" min="0" max="20000" />
+          </div>
+          <div class="rangeInput">
+              <label id="twoPercentLabel" for="volume">50</label>
+            <input type="range" id="twoPercent" name="twoPercent" min="0" max="100" />
+          </div>
+          <div class="rangeInput">
+              <label id="threePercentLabel" for="volume">50</label>
+            <input type="range" id="threePercent" name="threePercent" min="0" max="100" />
+          </div>
+        </div>
+        <button id="serchPlayers" type="submit">Submit</button>
+      </form>
+      <table id="myTable">
+          <thead>
+              <tr id="headRow">
+                  <th class="playerInfo">player</th>
+                  <th class="playerInfo">position</th>
+                  <th class="playerInfo">points</th>
+                  <th class="playerInfo">FG%</th>
+                  <th class="playerInfo">3P%</th>
+                  <th class="playerInfo">Action</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </main>
+    <footer></footer>
+  </body>
 </html>

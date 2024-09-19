@@ -1,0 +1,87 @@
+header {
+  background-color: #143c87;
+  display: flex;
+  justify-content: center;
+}
+#mainTitle {
+  color: white;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+#players {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 80%;
+}
+.player {
+  background-color: #f5f5f5;
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.positionPlayer {
+  color: #143c87;
+}
+.rangeInput {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}
+#serchPlayer {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#inputSerchPlayer {
+  width: 90%;
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  align-items: center;
+}
+table {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+thead {
+  background-color: red;
+  width: 90%;
+  display: flex;
+}
+tbody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+tr{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.playerInfo {
+  color: rgb(255, 255, 255);
+}
+.addButton {
+  background-color: #143c87;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#headRow {
+  justify-content: space-around;
+  width: 100%;
+  display: flex;
+}
