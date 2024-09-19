@@ -63,7 +63,6 @@ function renderAllCardfromLocalStorge(): void {
   }
 }
 
-//window.onload = () =>renderCard(document.getElementById("pgPos") as HTMLDivElement, playersInNba[0]);
 function findCard(postion: string, players: PlearInNBA): any {
   switch (postion) {
     case "PG":
@@ -158,6 +157,7 @@ function insertNewScooterRow(
     findCard(player.position, player)
   );
   cell6.appendChild(appedndButton);
+  cell6.classList.add("divOfBotton")  ;
 }
 
 async function getPlayers(playerSearch: playerSearch): Promise<void> {}

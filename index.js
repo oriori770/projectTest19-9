@@ -47,7 +47,6 @@ function renderAllCardfromLocalStorge() {
         }
     }
 }
-//window.onload = () =>renderCard(document.getElementById("pgPos") as HTMLDivElement, playersInNba[0]);
 function findCard(postion, players) {
     switch (postion) {
         case "PG":
@@ -131,6 +130,7 @@ function insertNewScooterRow(player, tableDiv) {
     cell5.textContent = player.threePercent.toString() + "%";
     appedndButton.addEventListener("click", () => findCard(player.position, player));
     cell6.appendChild(appedndButton);
+    cell6.classList.add("divOfBotton");
 }
 function getPlayers(playerSearch) {
     return __awaiter(this, void 0, void 0, function* () { });
