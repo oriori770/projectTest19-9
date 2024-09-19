@@ -1,3 +1,4 @@
+const KEY_L_S = "My Fantasy Team"
 const table = document.getElementById("tableBody") as HTMLTableElement;
 const pgPos = document.getElementById("pgPos") as HTMLDivElement;
 const sgPos = document.getElementById("sgPos") as HTMLDivElement;
@@ -14,8 +15,8 @@ const threePercent = document.getElementById(
   "threePercent"
 ) as HTMLInputElement;
 const twoPercent = document.getElementById("twoPercent") as HTMLInputElement;
-const points = document.getElementById("points") as HTMLInputElement ;
-const pointsLabel = document.getElementById("pointsLabel") as HTMLLabelElement ;
+const points = document.getElementById("points") as HTMLInputElement;
+const pointsLabel = document.getElementById("pointsLabel") as HTMLLabelElement;
 const twoPercentLabel = document.getElementById(
   "twoPercentLabel"
 ) as HTMLLabelElement;
@@ -23,12 +24,20 @@ const threePercentLabel = document.getElementById(
   "threePercentLabel"
 ) as HTMLLabelElement;
 
-points.addEventListener("input", (event) => pointsLabel.textContent = event.target.value );
-    
-threePercent.addEventListener("input", (event) => threePercentLabel.textContent = event.target.value);
+points.addEventListener(
+  "input",
+  (event) => (pointsLabel.textContent = event.target.value)
+);
 
-twoPercent.addEventListener("input", (event) => twoPercentLabel.textContent = event.target.value);
+threePercent.addEventListener(
+  "input",
+  (event) => (threePercentLabel.textContent = event.target.value)
+);
 
+twoPercent.addEventListener(
+  "input",
+  (event) => (twoPercentLabel.textContent = event.target.value)
+);
 
 const URL_NBA: string = "https://nbaserver-q21u.onrender.com/api/filter";
 let playersInNba: PlearInNBA[] = [
@@ -41,25 +50,41 @@ let playersInNba: PlearInNBA[] = [
   },
 ];
 
-//window.onload = () =>   renderTable(table, players);
+window.onload = () => renderAllCardfromLocalStorge();
+
+function renderAllCardfromLocalStorge(): void {
+  let value:any;
+  let playersInTeam = getFromLocalStorage(KEY_L_S);
+  for (let key in playersInTeam) {
+    if (playersInTeam.hasOwnProperty(key)) {
+        value = playersInTeam[key];
+        findCard(key,value)
+    }
+  }
+}
 
 //window.onload = () =>renderCard(document.getElementById("pgPos") as HTMLDivElement, playersInNba[0]);
 function findCard(postion: string, players: PlearInNBA): any {
   switch (postion) {
     case "PG":
       renderCard(pgPos, players);
+      saveOnObjInLS(postion, players)
       break;
     case "SF":
       renderCard(sfPos, players);
+      saveOnObjInLS(postion, players)
       break;
     case "SG":
       renderCard(sgPos, players);
+      saveOnObjInLS(postion, players);
       break;
     case "PF":
       renderCard(pfPos, players);
+      saveOnObjInLS(postion, players);
       break;
     case "C":
       renderCard(cPos, players);
+      saveOnObjInLS(postion, players);
       break;
     default:
       break;
@@ -155,9 +180,10 @@ async function postToApi(
   return players;
 }
 
-function getFromLocalStorage(key: string) {
+function getFromLocalStorage(key: string = KEY_L_S) {
   const value = localStorage.getItem(key);
-  if (value === undefined || value === null) return [];
+  if (value === undefined || value === null) return {};
+  console.log("fund");
   return toObject(value);
 }
 
@@ -168,12 +194,12 @@ function toString(value) {
 function toObject(value) {
   return JSON.parse(value);
 }
-function saveOnArryInLS(value) {
-  let list = getFromLocalStorage("List of soldiers");
-  list.push(value);
-  saveAtLocalStorge(list, "List of soldiers");
+function saveOnObjInLS(key, value) {
+  let obj = getFromLocalStorage(KEY_L_S);
+  obj[key] = value;
+  saveAtLocalStorge(obj, KEY_L_S);
 }
-function saveAtLocalStorge(value, key = "List of soldiers") {
+function saveAtLocalStorge(value, key = KEY_L_S) {
   value = toString(value);
   localStorage.setItem(key, value);
 }

@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+const KEY_L_S = "My Fantasy Team";
 const table = document.getElementById("tableBody");
 const pgPos = document.getElementById("pgPos");
 const sgPos = document.getElementById("sgPos");
@@ -22,9 +23,9 @@ const points = document.getElementById("points");
 const pointsLabel = document.getElementById("pointsLabel");
 const twoPercentLabel = document.getElementById("twoPercentLabel");
 const threePercentLabel = document.getElementById("threePercentLabel");
-points.addEventListener("input", (event) => pointsLabel.textContent = event.target.value);
-threePercent.addEventListener("input", (event) => threePercentLabel.textContent = event.target.value);
-twoPercent.addEventListener("input", (event) => twoPercentLabel.textContent = event.target.value);
+points.addEventListener("input", (event) => (pointsLabel.textContent = event.target.value));
+threePercent.addEventListener("input", (event) => (threePercentLabel.textContent = event.target.value));
+twoPercent.addEventListener("input", (event) => (twoPercentLabel.textContent = event.target.value));
 const URL_NBA = "https://nbaserver-q21u.onrender.com/api/filter";
 let playersInNba = [
     {
@@ -35,24 +36,39 @@ let playersInNba = [
         points: 127,
     },
 ];
-//window.onload = () =>   renderTable(table, players);
+window.onload = () => renderAllCardfromLocalStorge();
+function renderAllCardfromLocalStorge() {
+    let value;
+    let playersInTeam = getFromLocalStorage(KEY_L_S);
+    for (let key in playersInTeam) {
+        if (playersInTeam.hasOwnProperty(key)) {
+            value = playersInTeam[key];
+            findCard(key, value);
+        }
+    }
+}
 //window.onload = () =>renderCard(document.getElementById("pgPos") as HTMLDivElement, playersInNba[0]);
 function findCard(postion, players) {
     switch (postion) {
         case "PG":
             renderCard(pgPos, players);
+            saveOnObjInLS(postion, players);
             break;
         case "SF":
             renderCard(sfPos, players);
+            saveOnObjInLS(postion, players);
             break;
         case "SG":
             renderCard(sgPos, players);
+            saveOnObjInLS(postion, players);
             break;
         case "PF":
             renderCard(pfPos, players);
+            saveOnObjInLS(postion, players);
             break;
         case "C":
             renderCard(cPos, players);
+            saveOnObjInLS(postion, players);
             break;
         default:
             break;
@@ -135,10 +151,11 @@ function postToApi(url, data) {
         return players;
     });
 }
-function getFromLocalStorage(key) {
+function getFromLocalStorage(key = KEY_L_S) {
     const value = localStorage.getItem(key);
     if (value === undefined || value === null)
-        return [];
+        return {};
+    console.log("fund");
     return toObject(value);
 }
 function toString(value) {
@@ -147,12 +164,12 @@ function toString(value) {
 function toObject(value) {
     return JSON.parse(value);
 }
-function saveOnArryInLS(value) {
-    let list = getFromLocalStorage("List of soldiers");
-    list.push(value);
-    saveAtLocalStorge(list, "List of soldiers");
+function saveOnObjInLS(key, value) {
+    let obj = getFromLocalStorage(KEY_L_S);
+    obj[key] = value;
+    saveAtLocalStorge(obj, KEY_L_S);
 }
-function saveAtLocalStorge(value, key = "List of soldiers") {
+function saveAtLocalStorge(value, key = KEY_L_S) {
     value = toString(value);
     localStorage.setItem(key, value);
 }
